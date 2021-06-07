@@ -16,9 +16,8 @@ import java.util.List;
 import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 
 
-@Controller
-@Entity
-@Table
+
+
 public class Controlador {
 
     @GetMapping("/")
