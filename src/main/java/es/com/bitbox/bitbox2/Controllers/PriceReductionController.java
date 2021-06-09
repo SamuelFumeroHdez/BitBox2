@@ -4,10 +4,7 @@ import es.com.bitbox.bitbox2.dto.PriceReductionDTO;
 import es.com.bitbox.bitbox2.dto.UserDTO;
 import es.com.bitbox.bitbox2.services.IPriceReductionService;
 import es.com.bitbox.bitbox2.services.IUserService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +24,18 @@ public class PriceReductionController {
         return iPriceReductionService.getAllPriceReductions();
     }
 
+    @PostMapping(value = "/priceReductions", consumes = "application/json")
+    public PriceReductionDTO createPriceReduction(@RequestBody PriceReductionDTO priceReductionDTO){
+        return iPriceReductionService.createPriceReduction(priceReductionDTO);
+    }
 
+    @GetMapping("/priceReductions/{id}")
+    public PriceReductionDTO getPriceReductionById(@PathVariable(name = "id") Long id){
+        return iPriceReductionService.getPriceReductionById(id);
+    }
+
+    @DeleteMapping("/priceReductions/{id}")
+    public void deletePriceReductionById(@PathVariable(name = "id") Long id){
+        iPriceReductionService.deletePriceReduction(id);
+    }
 }

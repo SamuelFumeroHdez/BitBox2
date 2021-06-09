@@ -28,11 +28,8 @@ public class Article {
     )
     private Set<Supplier> suppliers;
 
-    /*public Article(String description, double precio, String status){
-        this.description = description;
-        this.precio = precio;
-        this.status = status;
-        this.creationDate = new Date();
-    }*/
+    public Set<Supplier> getSuppliers(){
+        return this.suppliers;
+    }
 
 }

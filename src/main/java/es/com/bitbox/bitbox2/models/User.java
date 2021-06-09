@@ -21,4 +21,5 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long iduser;
     private String name;
+    private String country;
 }

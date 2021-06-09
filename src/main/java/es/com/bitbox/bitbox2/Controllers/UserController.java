@@ -4,10 +4,7 @@ import es.com.bitbox.bitbox2.dto.SupplierDTO;
 import es.com.bitbox.bitbox2.dto.UserDTO;
 import es.com.bitbox.bitbox2.services.ISupplierService;
 import es.com.bitbox.bitbox2.services.IUserService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,6 +22,22 @@ public class UserController {
     @GetMapping("/users/")
     public List<UserDTO> getAllSuppliers(){
         return iUserService.getAllUserss();
+    }
+
+    @PostMapping(value = "/users", consumes = "application/json")
+    public UserDTO createUser(@RequestBody UserDTO userDTO){
+        return iUserService.createUser(userDTO);
+    }
+
+    @GetMapping("/users/{id}")
+    public UserDTO getUserbyId(@PathVariable(name = "id") Long id){
+        return iUserService.getUserById(id);
+    }
+
+
+    @DeleteMapping("/users/{id}")
+    public void deleteUserById(@PathVariable(name = "id") Long id){
+        iUserService.deleteUser(id);
     }
 
 

@@ -1,5 +1,6 @@
 package es.com.bitbox.bitbox2.services.impl;
 
+import es.com.bitbox.bitbox2.dto.ArticleDTO;
 import es.com.bitbox.bitbox2.dto.SupplierDTO;
 import es.com.bitbox.bitbox2.models.Supplier;
 import es.com.bitbox.bitbox2.repositories.SupplierRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,16 +35,18 @@ public class SupplierService implements ISupplierService {
 
     @Override
     public SupplierDTO createSupplier(SupplierDTO supplierDTO) {
-        return null;
+        return modelMapper.map(supplierRepository.save(modelMapper.map(supplierDTO,Supplier.class)), SupplierDTO.class);
     }
 
     @Override
     public SupplierDTO getSupplierById(long id) {
-        return null;
+        Optional<Supplier> supplier = supplierRepository.findById(id); //Corregir esto
+        return modelMapper.map(supplier.get(), SupplierDTO.class);
+
     }
 
     @Override
     public void deleteSupplier(long id) {
-
+        supplierRepository.deleteById(id);
     }
 }

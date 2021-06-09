@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class SupplierDTO {
-    private Long idvendor;
+    private Long idsupplier;
     private String name;
     private String country;
 }

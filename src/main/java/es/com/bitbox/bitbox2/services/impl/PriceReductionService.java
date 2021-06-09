@@ -2,6 +2,7 @@ package es.com.bitbox.bitbox2.services.impl;
 
 import es.com.bitbox.bitbox2.dto.PriceReductionDTO;
 import es.com.bitbox.bitbox2.dto.UserDTO;
+import es.com.bitbox.bitbox2.models.Article;
 import es.com.bitbox.bitbox2.models.PriceReduction;
 import es.com.bitbox.bitbox2.models.User;
 import es.com.bitbox.bitbox2.repositories.PriceReductionRepository;
@@ -37,16 +38,18 @@ public class PriceReductionService implements IPriceReductionService {
 
     @Override
     public PriceReductionDTO createPriceReduction(PriceReductionDTO priceReductionDTO) {
-        return null;
+        PriceReduction priceReductionRequest = modelMapper.map(priceReductionDTO, PriceReduction.class);
+        PriceReduction priceReductionResponse = priceReductionRepository.save(priceReductionRequest);
+        return modelMapper.map(priceReductionResponse, PriceReductionDTO.class);
     }
 
     @Override
     public PriceReductionDTO getPriceReductionById(long id) {
-        return null;
+        return modelMapper.map(priceReductionRepository.findById(id), PriceReductionDTO.class);
     }
 
     @Override
     public void deletePriceReduction(long id) {
-
+        priceReductionRepository.deleteById(id);
     }
 }

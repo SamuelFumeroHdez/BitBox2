@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,17 +38,18 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserDTO createUser(UserDTO supplierDTO) {
-        return null;
+    public UserDTO createUser(UserDTO userDTO) {
+        return modelMapper.map(userRepository.save(modelMapper.map(userDTO, User.class)), UserDTO.class);
     }
 
     @Override
     public UserDTO getUserById(long id) {
-        return null;
+        Optional<User> userResult = userRepository.findById(id);
+        return modelMapper.map(userResult.get(), UserDTO.class);
     }
 
     @Override
     public void deleteUser(long id) {
-
+        userRepository.deleteById(id);
     }
 }
