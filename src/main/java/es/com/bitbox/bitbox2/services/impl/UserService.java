@@ -1,12 +1,8 @@
 package es.com.bitbox.bitbox2.services.impl;
 
-import es.com.bitbox.bitbox2.dto.SupplierDTO;
 import es.com.bitbox.bitbox2.dto.UserDTO;
-import es.com.bitbox.bitbox2.models.Supplier;
 import es.com.bitbox.bitbox2.models.User;
-import es.com.bitbox.bitbox2.repositories.SupplierRepository;
 import es.com.bitbox.bitbox2.repositories.UserRepository;
-import es.com.bitbox.bitbox2.services.ISupplierService;
 import es.com.bitbox.bitbox2.services.IUserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

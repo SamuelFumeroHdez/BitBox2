@@ -28,8 +28,39 @@ public class Article {
     )
     private Set<Supplier> suppliers;
 
+    @ManyToOne
+    @JoinTable(
+            name="users",
+            joinColumns = @JoinColumn (name = "idarticle"),
+            inverseJoinColumns = @JoinColumn( name = "iduser")
+    )
+    private User user;
+
+    @ManyToMany
+    @JoinTable(
+            name="pricereductions",
+            joinColumns = @JoinColumn(name="idarticle"),
+            inverseJoinColumns = @JoinColumn(name="idpricereduction")
+    )
+    private Set<PriceReduction> priceReductions;
+
     public Set<Supplier> getSuppliers(){
         return this.suppliers;
     }
 
+    public User getUser(){
+        return this.user;
+    }
+
+    public void setUser(User user){
+        this.user = user;
+    }
+
+    public Set<PriceReduction> getPriceReductions() {
+        return priceReductions;
+    }
+
+    public void setPriceReductions(Set<PriceReduction> priceReductions) {
+        this.priceReductions = priceReductions;
+    }
 }

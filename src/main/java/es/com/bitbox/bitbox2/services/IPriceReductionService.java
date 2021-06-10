@@ -2,7 +2,6 @@ package es.com.bitbox.bitbox2.services;
 
 
 import es.com.bitbox.bitbox2.dto.PriceReductionDTO;
-import es.com.bitbox.bitbox2.dto.UserDTO;
 
 import java.util.List;
 

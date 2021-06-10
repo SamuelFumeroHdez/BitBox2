@@ -1,9 +1,7 @@
 package es.com.bitbox.bitbox2.Controllers;
 
 import es.com.bitbox.bitbox2.dto.PriceReductionDTO;
-import es.com.bitbox.bitbox2.dto.UserDTO;
 import es.com.bitbox.bitbox2.services.IPriceReductionService;
-import es.com.bitbox.bitbox2.services.IUserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

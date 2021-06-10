@@ -1,8 +1,6 @@
 package es.com.bitbox.bitbox2.Controllers;
 
-import es.com.bitbox.bitbox2.dto.SupplierDTO;
 import es.com.bitbox.bitbox2.dto.UserDTO;
-import es.com.bitbox.bitbox2.services.ISupplierService;
 import es.com.bitbox.bitbox2.services.IUserService;
 import org.springframework.web.bind.annotation.*;
 

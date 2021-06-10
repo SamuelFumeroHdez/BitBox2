@@ -1,14 +1,9 @@
 package es.com.bitbox.bitbox2.services.impl;
 
 import es.com.bitbox.bitbox2.dto.PriceReductionDTO;
-import es.com.bitbox.bitbox2.dto.UserDTO;
-import es.com.bitbox.bitbox2.models.Article;
 import es.com.bitbox.bitbox2.models.PriceReduction;
-import es.com.bitbox.bitbox2.models.User;
 import es.com.bitbox.bitbox2.repositories.PriceReductionRepository;
-import es.com.bitbox.bitbox2.repositories.UserRepository;
 import es.com.bitbox.bitbox2.services.IPriceReductionService;
-import es.com.bitbox.bitbox2.services.IUserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -2,7 +2,6 @@ package es.com.bitbox.bitbox2.services;
 
 
 import es.com.bitbox.bitbox2.dto.UserDTO;
-import es.com.bitbox.bitbox2.models.User;
 
 import java.util.List;
 

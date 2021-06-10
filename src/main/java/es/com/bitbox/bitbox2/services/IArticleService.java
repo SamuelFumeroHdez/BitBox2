@@ -11,5 +11,7 @@ public interface IArticleService {
     ArticleDTO createArticle(ArticleDTO articleDTO);
     ArticleDTO getArticleById(long id);
     void deleteArticle(long id);
-    void addSupplier(long idArticle, long idSupplier) throws Exception;
+    ArticleDTO addSupplier(long idArticle, long idSupplier) throws Exception;
+    ArticleDTO updateUser(long idArticle, long idUser);
+    ArticleDTO insertPriceReduction(long idArticle, long idPriceReduction);
 }

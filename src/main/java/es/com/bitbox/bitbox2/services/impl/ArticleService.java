@@ -4,9 +4,13 @@ import es.com.bitbox.bitbox2.Controllers.SupplierController;
 import es.com.bitbox.bitbox2.dto.ArticleDTO;
 import es.com.bitbox.bitbox2.dto.SupplierDTO;
 import es.com.bitbox.bitbox2.models.Article;
+import es.com.bitbox.bitbox2.models.PriceReduction;
 import es.com.bitbox.bitbox2.models.Supplier;
+import es.com.bitbox.bitbox2.models.User;
 import es.com.bitbox.bitbox2.repositories.ArticleRepository;
+import es.com.bitbox.bitbox2.repositories.PriceReductionRepository;
 import es.com.bitbox.bitbox2.repositories.SupplierRepository;
+import es.com.bitbox.bitbox2.repositories.UserRepository;
 import es.com.bitbox.bitbox2.services.IArticleService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -30,6 +34,10 @@ public class ArticleService implements IArticleService {
     private SupplierRepository supplierRepository;
     @Autowired
     private ArticleRepository articleRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private PriceReductionRepository priceReductionRepository;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -60,12 +68,37 @@ public class ArticleService implements IArticleService {
         articleRepository.deleteById(id);
     }
 
-    public void addSupplier(long idArticle, long idSupplier) throws Exception{
-       supplierRepository.findById(idSupplier).isPresent();
+    @Override
+    public ArticleDTO addSupplier(long idArticle, long idSupplier) throws Exception{
+
+        Article article = articleRepository.findById(idArticle).get();
+        Supplier supplier = supplierRepository.findById(idSupplier).get();
+
+        article.getSuppliers().add(supplier);
+        articleRepository.save(article);
+        return modelMapper.map(article,ArticleDTO.class);
 
     }
 
-    private void insertSupplier(Long idArticle, SupplierDTO){
-        Optional<Article> article = articleRepository.findById()
+    @Override
+    public ArticleDTO updateUser(long idArticle, long idUser) {
+        Article article = articleRepository.findById(idArticle).get();
+        User user = userRepository.findById(idUser).get();
+
+        article.setUser(user);
+        articleRepository.save(article);
+        return modelMapper.map(article,ArticleDTO.class);
     }
+
+    @Override
+    public ArticleDTO insertPriceReduction(long idArticle, long idPriceReduction) {
+        Article article = articleRepository.findById(idArticle).get();
+        PriceReduction priceReduction = priceReductionRepository.findById(idPriceReduction).get();
+
+        article.getPriceReductions().add(priceReduction);
+        articleRepository.save(article);
+        return modelMapper.map(article,ArticleDTO.class);
+    }
+
+
 }

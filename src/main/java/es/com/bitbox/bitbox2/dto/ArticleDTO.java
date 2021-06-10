@@ -1,6 +1,8 @@
 package es.com.bitbox.bitbox2.dto;
 
+import es.com.bitbox.bitbox2.models.PriceReduction;
 import es.com.bitbox.bitbox2.models.Supplier;
+import es.com.bitbox.bitbox2.models.User;
 import lombok.Data;
 
 import java.util.Date;
@@ -14,4 +16,6 @@ public class ArticleDTO {
     private String status;
     private Date creationDate;
     private Set<Supplier> suppliers;
+    private User user;
+    private Set<PriceReduction> priceReductions;
 }

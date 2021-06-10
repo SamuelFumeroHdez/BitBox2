@@ -32,10 +32,23 @@ public class ArticleController {
         return iArticleService.createArticle(articleDTO);
     }
 
-    @PutMapping(value = "/articles/{idArticle}/{idSupplier}")
-    public void insertSupplier(@PathVariable(name = "idArticle") Long idArticle, @PathVariable(name = "idSupplier") Long idSupplier) throws Exception {
+    @PutMapping(value = "/articles/{idArticle}/suppliers/{idSupplier}")
+    public ArticleDTO insertSupplier(@PathVariable(name = "idArticle") Long idArticle, @PathVariable(name = "idSupplier") Long idSupplier) throws Exception {
+
+        return iArticleService.addSupplier(idArticle, idSupplier);
+    }
+
+    @PutMapping(value = "/articles/{idArticle}/users/{idUser}")
+    public ArticleDTO updateUser(@PathVariable(name = "idArticle") Long idArticle, @PathVariable(name = "idUser") Long idUser) throws Exception {
         //return iArticleService.addSupplier(supplierDTO, id);
-        iArticleService.addSupplier(idArticle, idSupplier);
+        return iArticleService.updateUser(idArticle, idUser);
+
+    }
+
+    @PutMapping(value = "/articles/{idArticle}/priceReductions/{idPriceReduction}")
+    public ArticleDTO insertPriceReduction(@PathVariable(name = "idArticle") Long idArticle, @PathVariable(name = "idPriceReduction") Long idPriceReduction) throws Exception {
+        //return iArticleService.addSupplier(supplierDTO, id);
+        return iArticleService.insertPriceReduction(idArticle, idPriceReduction);
 
     }
 
