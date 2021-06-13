@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
@@ -11,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export const AddUser = () => {
+export const AddUser = ({setUsuarios}) => {
     const classes = useStyles();
     const [inputValue, setInputValue] = useState('')
     const handleInputChange = (e) =>{
@@ -19,8 +20,12 @@ export const AddUser = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Submit hecho')
-        setInputValue('');
+        console.log('Submit hecho');
+        if(inputValue.trim().length > 2){
+            setUsuarios( users => [...users, inputValue]); //User se necesita para acceder a los usuarios de UsersTableComponents
+            setInputValue('');
+        }
+        
     }
     return (
         <>
@@ -30,4 +35,8 @@ export const AddUser = () => {
             </form>
         </>
     )
+}
+
+AddUser.propTypes = {
+    setUsuarios: PropTypes.func.isRequired
 }

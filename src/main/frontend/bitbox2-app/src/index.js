@@ -9,7 +9,7 @@ import UsersTableComponent from './Components/UsersTableComponent.js';
 
 ReactDOM.render(
  
-  <App/>,
+  <UsersTableComponent/>,
  
   document.getElementById('root')
 );
