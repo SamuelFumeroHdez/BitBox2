@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Entity
 @NoArgsConstructor
@@ -22,4 +23,8 @@ public class User {
     private Long iduser;
     private String name;
     private String country;
+    private String phone;
+    private Date entryDate;
+    private String description;
+    private String email;
 }

@@ -26,7 +26,7 @@ export const UserGrid = ({usuario}) => {
     }
 
     return (
-        <>
+        <div className="card-grid">
             {
                 usuarios.map(usuario => (
                     <UserGrifItem
@@ -35,6 +35,7 @@ export const UserGrid = ({usuario}) => {
                      />
                 ))
             }
-        </>
+        </div>
+            
     )
 }
