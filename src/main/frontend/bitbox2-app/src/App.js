@@ -17,7 +17,7 @@ function App(){
       const consultarAPI = () =>{
         clienteAxios.get('/api/users/')
         .then(res => {
-          console.log(res)
+          console.log(res.data)
           guardarUsuarios(res.data);
           //deshabilitar la consulta
           guardarConsultar(false);

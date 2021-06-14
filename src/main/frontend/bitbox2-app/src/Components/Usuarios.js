@@ -1,11 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import logoBitbox from '../assets/img/logoBitbox.png';
+
 
 const Usuarios = ({usuarios}) => {
     if(usuarios.length === 0) return null;
+    
     return (
         <>
-            <h1 className="my-5">Administrador de Usuarios</h1>
+            <div className= "d-flex w-100 justify-content-between mb-4 ">
+                <img src="../../public/logoBitbox.png" ></img>
+                <h1 className="my-5">Administrador de Usuarios</h1>
+                <img src={logoBitbox} alt={"Bitbox"} />
+            </div>
+            
             <div className="containter mt-5 py-5">
                 <div className="row">
                     <div className="col-12 mb-5 d-flex justify-content-center">
@@ -28,6 +36,7 @@ const Usuarios = ({usuarios}) => {
 
                                     <div className="contacto py-3">
                                         <p><b>Teléfono: </b>{usuario.phone}</p>
+                                        
                                         <p><b>Fecha de alta: </b>{(usuario.entryDate).substr(0,10)}</p>
                                         <br/>
                                         <p><b>Descripción: </b>{usuario.description}</p>
