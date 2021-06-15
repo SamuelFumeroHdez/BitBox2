@@ -7,6 +7,8 @@ const NuevoUsuario = (props) => {
 
     //Generar state como objeto
 
+    console.log("Props", props);
+
     const [usuario, guardarUsuario] = useState({
         name: '',
         country: '',
@@ -30,7 +32,8 @@ const NuevoUsuario = (props) => {
         clienteAxios.post('/api/users', usuario)
             .then(res => {
                 console.log(res);
-                props.guardarConsultar(true);
+                //props.guardarConsultar(true);
+                props.usuarios.push(res.data);
                 //Redireccionar
                 props.history.push('/users');
                 Swal.fire({
@@ -40,8 +43,6 @@ const NuevoUsuario = (props) => {
                     showConfirmButton: false,
                     timer: 1500
                   })
-
-
             })
             .catch(error => {
                 console.log(error);

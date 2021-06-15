@@ -57,6 +57,8 @@ function App(){
       .catch(error =>{
         console.log(error)
       })
+
+      //
     
   }
   }, [consultar, consultarProveedores, consultarArticulos]);
@@ -64,7 +66,7 @@ function App(){
     <Router>
       <Switch>
         <Route exact path="/users" component={()=> <Usuarios usuarios={usuarios} />}/>
-        <Route exact path="/newUser" component={() => <NuevoUsuario guardarConsultar={guardarConsultar}/>}/>
+        <Route exact path="/newUser" component={() => <NuevoUsuario guardarConsultar={guardarConsultar} usuarios={usuarios}/>}/>
         <Route 
           exact path="/users/:id" 
           render={(props) =>{
