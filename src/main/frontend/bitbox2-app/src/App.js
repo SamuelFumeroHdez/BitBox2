@@ -5,30 +5,61 @@ import Articulos from './Components/Articulos';
 import Suppliers from './Components/Suppliers';
 import clienteAxios from './config/axios';
 import NuevoUsuario from './Components/NuevoUsuario';
+import NuevoProveedor from './Components/NuevoProveedor';
 import User from './Components/User';
+import Supplier from './Components/Supplier';
 
 
 function App(){
   //State de la app
   const [usuarios, guardarUsuarios] = useState([]);
+  const [proveedores, guardarProveedores] = useState([]);
+  const [articulos, guardarArticulos] = useState([]);
   const [consultar, guardarConsultar] = useState(true);
+  const [consultarProveedores, guardarConsultarProveedores] = useState(true);
+  const [consultarArticulos, guardarConsultarArticulos] = useState(true);
   useEffect(() => {
     if(consultar){
-      const consultarAPI = () =>{
-        clienteAxios.get('/api/users/')
+      clienteAxios.get('/api/users/')
+      .then(res => {
+        console.log(res.data)
+        guardarUsuarios(res.data);
+        //deshabilitar la consulta
+        guardarConsultar(false);
+      })
+      .catch(error =>{
+        console.log(error)
+      })
+    
+      
+    }
+    if(consultarProveedores){
+        clienteAxios.get('/api/suppliers/')
         .then(res => {
           console.log(res.data)
-          guardarUsuarios(res.data);
+          guardarProveedores(res.data);
           //deshabilitar la consulta
-          guardarConsultar(false);
+          guardarConsultarProveedores(false);
         })
         .catch(error =>{
           console.log(error)
         })
-      }
-      consultarAPI();
+      
     }
-  }, [consultar]);
+    if(consultarArticulos){
+      clienteAxios.get('/api/articles/')
+      .then(res => {
+        console.log(res.data)
+        guardarArticulos(res.data);
+        //deshabilitar la consulta
+        guardarConsultarArticulos(false);
+      })
+      .catch(error =>{
+        console.log(error)
+      })
+    
+  }
+  }, [consultar, consultarProveedores, consultarArticulos]);
   return (
     <Router>
       <Switch>
@@ -37,14 +68,31 @@ function App(){
         <Route 
           exact path="/users/:id" 
           render={(props) =>{
-            console.log(props);
+            const usuario = usuarios.filter(usuario=>{
+              console.log("usuario actual: ", usuario)
+              return usuario.iduser == props.match.params.id;
+            })
+            console.log(usuario);
             return (
-              <User/>
+              <User usuario={usuario[0]} guardarConsultar={guardarConsultar}/>
             )
           }}
         />
-        <Route exact path="/articles" component={Articulos}/>
-        <Route exact path="/suppliers" component={Suppliers}/>
+        <Route exact path="/suppliers" component={()=><Suppliers proveedores={proveedores}/>}/>
+        <Route exact path="/newSupplier" component={() => <NuevoProveedor guardarConsultarProveedores={guardarConsultarProveedores}/>}/>
+        <Route
+        exact path="/suppliers/:id" 
+        render={(props) =>{
+          const proveedor = proveedores.filter(prv=>{
+            return prv.idsupplier == props.match.params.id;
+          })
+          return (
+            <Supplier proveedor={proveedor[0]} guardarConsultarProveedores={guardarConsultarProveedores}/>
+          )
+        }}
+        />
+        <Route exact path="/articles" component={()=><Articulos articulos={articulos}/>}/>
+        
       </Switch>
     </Router>
   )

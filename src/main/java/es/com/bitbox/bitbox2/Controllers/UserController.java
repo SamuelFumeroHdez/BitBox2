@@ -17,25 +17,25 @@ public class UserController {
         this.iUserService = iUserService;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/users/")
     public List<UserDTO> getAllSuppliers(){
         return iUserService.getAllUserss();
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(value = "/users", consumes = "application/json")
     public UserDTO createUser(@RequestBody UserDTO userDTO){
         return iUserService.createUser(userDTO);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/users/{id}")
     public UserDTO getUserbyId(@PathVariable(name = "id") Long id){
         return iUserService.getUserById(id);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/users/{id}")
     public void deleteUserById(@PathVariable(name = "id") Long id){
         iUserService.deleteUser(id);

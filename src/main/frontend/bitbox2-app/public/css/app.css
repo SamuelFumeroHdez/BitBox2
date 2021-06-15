@@ -7,9 +7,9 @@ html {
 }
 
 body {
-    background: #AA076B; 
-    background: -webkit-linear-gradient(to right, #61045F, #AA076B);  
-    background: linear-gradient(to right, #61045F, #AA076B); 
+    background: #3338DF; 
+    background: -webkit-linear-gradient(to right, #272A87, #3338DF);  
+    background: linear-gradient(to right, #272A87, #3338DF); 
     font-size: 1.6rem;
 }
 

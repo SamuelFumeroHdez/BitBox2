@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Entity
 @NoArgsConstructor
@@ -19,6 +20,10 @@ public class Supplier {
     private Long idsupplier;
     private String name;
     private String country;
+    private String phone;
+    private Date entryDate;
+    private String description;
+    private String email;
 
     public Long getIdsupplier() {
         return idsupplier;

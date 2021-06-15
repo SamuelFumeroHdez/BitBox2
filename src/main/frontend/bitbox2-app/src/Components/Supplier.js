@@ -1,24 +1,23 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom';
-import Usuarios from './Usuarios';
 import clienteAxios from '../config/axios';
 import Swal from 'sweetalert2';
+import Suppliers from './Suppliers';
 
-const User = (props) => {
-  
-    if(!props.usuario){
-            props.history.push('/users');
-            return null;
+const Supplier = (props) => {
+    console.log(props)
+    if(!props.proveedor){
+        props.history.push('/suppliers');
+        return null;
     }
-    const {usuario: {iduser, name, country, email, phone, entryDate, description}} = props;
-
+    const {proveedor: {idsupplier,name, country, email, phone, entryDate, description}} = props;
     //elimina un registro
-    const eliminarUsuario = id =>{
+    const eliminarProveedor = id =>{
         
 
         Swal.fire({
             title: '¿Estás seguro?',
-            text: "Un usuario eliminado NO se puede recuperar",
+            text: "Un proveedor eliminado NO se puede recuperar",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -35,10 +34,10 @@ const User = (props) => {
               )
 
               //Eliminado de la base de datos
-              clienteAxios.delete(`/api/users/${id}`)
+              clienteAxios.delete(`/api/suppliers/${id}`)
                 .then(res =>{
-                    props.guardarConsultar(true)
-                    props.history.push('/users')
+                    props.guardarConsultarProveedores(true)
+                    props.history.push('/suppliers')
                 })
                 .catch(error => {
                     console.log(error);
@@ -47,13 +46,13 @@ const User = (props) => {
           })
         
     }
-    return ( 
-        <>
-            <h1 className="my-5">Nombre Usuario: {name}</h1>
+    return (   
+         <>
+            <h1 className="my-5">Nombre Proveedor: {name}</h1>
             <div className="containter mt-5 py-5">
                 <div className="row">
                     <div className="col-12 mb-5 d-flex justify-content-center">
-                        <Link to={'/users'} className="btn btn-success text-uppercase py-2 px-5 font-weight-bold">Volver</Link>
+                        <Link to={'/suppliers'} className="btn btn-success text-uppercase py-2 px-5 font-weight-bold">Volver</Link>
                     </div>
 
                     <div className="col-md-8 mx-auto">
@@ -80,7 +79,7 @@ const User = (props) => {
                                 <div className="">
                                     <button type="button" className="text-uppercase py-2 px-5
                                         font-weight-bold btn btn-danger col"
-                                        onClick={()=>eliminarUsuario(iduser)}>
+                                        onClick={()=>eliminarProveedor(idsupplier)}>
                                         Eliminar &times;
                                     </button>
                                 </div>
@@ -91,7 +90,7 @@ const User = (props) => {
             </div>
             
         </>
-     );
+    );
 }
  
-export default withRouter(User);
+export default withRouter(Supplier);

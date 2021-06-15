@@ -1,17 +1,25 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import logoBitbox from '../assets/img/logoBitbox.png';
+import logoBitbox from '../assets/img/logoBitBox.png';
+import logoIkea from '../assets/img/logoIkea.png';
+
 
 
 const Usuarios = ({usuarios}) => {
-    if(usuarios.length === 0) return null;
+    //if(usuarios.length === 0) return null;
     
     return (
         <>
-            <div className= "d-flex w-100 justify-content-between mb-4 ">
-                <img src="../../public/logoBitbox.png" ></img>
-                <h1 className="my-5">Administrador de Usuarios</h1>
-                <img src={logoBitbox} alt={"Bitbox"} />
+            <div className= "d-flex w-100 justify-content-between mb-4">
+                <div>
+                    <img className="my-5 mx-5" src={logoBitbox} alt="Logo bitbox" width="450" height="80"/>
+                </div>
+                
+                <h1 className="my-5 mx-5">Administrador de Usuarios</h1>
+                <div>
+                    <img className="my-1 mx-5" src={logoIkea} alt="Logo bitbox" width="450" height="160"/>
+                </div>
+                
             </div>
             
             <div className="containter mt-5 py-5">

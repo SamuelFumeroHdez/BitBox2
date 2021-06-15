@@ -3,11 +3,11 @@ import { Link, withRouter } from 'react-router-dom';
 import clienteAxios from '../config/axios';
 import Swal from 'sweetalert2';
 
-const NuevoUsuario = (props) => {
+const NuevoProveedor = (props) => {
 
     //Generar state como objeto
 
-    const [usuario, guardarUsuario] = useState({
+    const [proveedor, guardarProveedor] = useState({
         name: '',
         country: '',
         phone: '',
@@ -18,25 +18,26 @@ const NuevoUsuario = (props) => {
 
     //Leer datos del formulario
     const actualizarState = e => {
-        guardarUsuario({
-            ...usuario,
+        guardarProveedor({
+            ...proveedor,
             [e.target.name] : e.target.value
         })
     };
 
     //Enviar una peticion a la API
-    const crearNuevoUsuario = e =>{
+    const crearNuevoProveedor = e =>{
+        console.log("Se llama a crear nuevo proveedor")
         e.preventDefault();
-        clienteAxios.post('/api/users', usuario)
+        clienteAxios.post('/api/suppliers', proveedor)
             .then(res => {
                 console.log(res);
-                props.guardarConsultar(true);
+                props.guardarConsultarProveedores(true);
                 //Redireccionar
-                props.history.push('/users');
+                props.history.push('/suppliers');
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'PUsaurio creado',
+                    title: 'Proveedor creado',
                     showConfirmButton: false,
                     timer: 1500
                   })
@@ -51,24 +52,24 @@ const NuevoUsuario = (props) => {
     return ( 
         
         <>
-            <h1 className="my-5">Crear nuevo usuario</h1>
+            <h1 className="my-5">Crear nuevo Proveedor</h1>
             <div className="containter mt-5 py-5">
                 <div className="row">
                     <div className="col-12 mb-5 d-flex justify-content-center">
-                        <Link to={'/users'} className="btn btn-success text-uppercase py-2 px-5 font-weight-bold">Volver</Link>
+                        <Link to={'/suppliers'} className="btn btn-success text-uppercase py-2 px-5 font-weight-bold">Volver</Link>
                     </div>
                     <div className="col-md-8 mx-auto">
                     <form
-                        onSubmit= {crearNuevoUsuario}
+                        onSubmit= {crearNuevoProveedor}
                         className="bg-white p-5 bordered">
                         <div className="form-group">
-                            <label htmlFor="nombre">Nombre Usuario</label>
+                            <label htmlFor="nombre">Nombre Proveedor</label>
                             <input 
                                 type="text" 
                                 className="form-control form-control-lg" 
                                 id="name" 
                                 name="name" 
-                                placeholder="Nombre Usuario" 
+                                placeholder="Nombre Proveedor" 
                                 onChange={actualizarState}
                             />
                         </div>
@@ -131,7 +132,7 @@ const NuevoUsuario = (props) => {
                         </div>
 
 
-                        <input type="submit" className="btn btn-primary mt-3 w-100 p-3 text-uppercase font-weight-bold" value="Crear Usuario"  />
+                        <input type="submit" className="btn btn-primary mt-3 w-100 p-3 text-uppercase font-weight-bold" value="Crear Proveedor"  />
                     </form>
                     </div>
                 </div>
@@ -142,4 +143,4 @@ const NuevoUsuario = (props) => {
      );
 }
  
-export default withRouter(NuevoUsuario);
+export default withRouter(NuevoProveedor);
