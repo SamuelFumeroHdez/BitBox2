@@ -32,7 +32,7 @@ const PriceReductions = () => {
                 
                 <h1 className="my-5 mx-5">Administrador de Rebajas</h1>
                 <div>
-                    <img className="mx-5" src={logoIkea} alt="Logo ikea" width="450" height="200"/>
+                <img className="mx-5 my-5" src={logoIkea} alt="Logo ikea" width="400" height="75"/>
                 </div>
                 
             </div>

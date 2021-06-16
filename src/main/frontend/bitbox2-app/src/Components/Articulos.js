@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+
 import { Link } from 'react-router-dom';
 import clienteAxios from '../config/axios';
 import logoBitbox from '../assets/img/logoBitBox.png';
@@ -7,6 +8,7 @@ import logoIkea from '../assets/img/logoIkeaSinFondo.png';
 const Articulos = () => {
 
     const [articles, saveArticles] = useState([]);
+    
     
     useEffect(()=>{
         clienteAxios.get('/api/articles/')
@@ -29,7 +31,7 @@ const Articulos = () => {
                 
                 <h1 className="my-5 mx-5">Administrador de Artículos</h1>
                 <div>
-                    <img className="my-1 mx-5" src={logoIkea} alt="Logo bitbox" width="450" height="200"/>
+                <img className="mx-5 my-5" src={logoIkea} alt="Logo ikea" width="400" height="75"/>
                 </div>
                 
             </div>
@@ -58,9 +60,22 @@ const Articulos = () => {
                                             $ {article.precio}
                                         </small>
                                     </div>
-                                    <p className="mb-0">
-                                        {article.status}
-                                    </p>
+                                    <div className="d-flex w-100 justify-content-between mb-4">
+                                        <p className="mb-0">
+                                            {article.status}
+                                        </p>
+                                        <div className="d-flex  justify-content-space-between mb-4">
+                                            <p>Proveedores</p>
+                                            {article.suppliers.map(supplier=>(
+                                                <div key={supplier.idsupplier} className="d-flex w-100 justify-content-between mb-4 item-card">
+                                                    <div className="mx-2">{supplier.name} </div>
+                                                    <div className="borde-redondo-blanco">&#88;</div>
+                                                </div>
+                                                
+                                            ))}
+                                        </div>
+                                    </div>
+                                    
 
                                     <div className="contacto py-3">
                                         <p><b>Fecha de creación: </b>{(article.creationDate).substr(0,10)}</p>

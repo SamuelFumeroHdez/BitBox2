@@ -93,6 +93,7 @@ public class ArticleService implements IArticleService {
     @Override
     public ArticleDTO insertPriceReduction(long idArticle, long idPriceReduction) {
         Article article = articleRepository.findById(idArticle).get();
+        System.out.println();
         PriceReduction priceReduction = priceReductionRepository.findById(idPriceReduction).get();
 
         article.getPriceReductions().add(priceReduction);

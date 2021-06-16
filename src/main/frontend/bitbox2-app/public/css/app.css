@@ -55,3 +55,16 @@ form {
 .no-text-decoration p{
     color: black !important;
 }
+
+.item-card{
+    text-decoration: none;
+    padding: 5px;
+    font-weight: 300;
+    font-size: 13px;
+    color: #ffffff;
+    background-color: #1883ba;
+    border-radius: 6px;
+    border: 2px solid #0016b0;
+}
+
+

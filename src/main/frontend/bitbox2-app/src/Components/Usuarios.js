@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import clienteAxios from '../config/axios';
 import { Link } from 'react-router-dom';
+import User from './User';
 import logoBitbox from '../assets/img/logoBitBox.png';
 import logoIkea from '../assets/img/logoIkeaSinFondo.png';
 
@@ -32,7 +33,7 @@ const Usuarios = () => {
                 
                 <h1 className="my-5 mx-5">Administrador de Usuarios</h1>
                 <div>
-                    <img className="mx-5" src={logoIkea} alt="Logo ikea" width="450" height="200"/>
+                    <img className="mx-5 my-5" src={logoIkea} alt="Logo ikea" width="400" height="75"/>
                 </div>
                 
             </div>
@@ -40,6 +41,7 @@ const Usuarios = () => {
             <div className="containter mt-5 py-5">
                 <div className="row">
                     <div className="col-12 mb-5 d-flex justify-content-center">
+                        
                         <Link to={{
                                 pathname: "/newUser",
                                 state: {usuarios: {usuarios}}

@@ -12,6 +12,7 @@ import Supplier from './Components/Supplier';
 import PriceReductions from './Components/PriceReductions';
 import NewPriceReduction from './Components/NewPriceReduction';
 import PriceReduction from './Components/PriceReduction';
+import Example from './Components/Example';
 
 
 
@@ -32,7 +33,7 @@ function App(){
         <Route exact path="/priceReductions" component={()=><PriceReductions/>}/>
         <Route exact path="/newPriceReduction" component={()=><NewPriceReduction/>}/>
         <Route exact path="/priceReductions/:id" component={() => <PriceReduction/>} />
-
+        <Route exact path="/example" component={() => <Example/>} />
       </Switch>
     </Router>
   )
