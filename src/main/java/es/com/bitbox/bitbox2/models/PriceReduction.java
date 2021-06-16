@@ -21,6 +21,7 @@ public class PriceReduction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPriceReduction;
+    private String description;
     private double reducedPrice;
     private Date startDate;
     private Date endDate;

@@ -6,16 +6,16 @@ import logoIkea from '../assets/img/logoIkeaSinFondo.png';
 
 
 
-const Usuarios = () => {
+const PriceReductions = () => {
 
     
-    const [usuarios, guardarUsuarios] = useState([]);
+    const [priceReductions, savePriceReductions] = useState([]);
 
     useEffect(()=>{
-        clienteAxios.get('/api/users/')
+        clienteAxios.get('/api/priceReductions/')
       .then(res => {
         console.log(res.data)
-        guardarUsuarios(res.data);
+        savePriceReductions(res.data);
         
       })
       .catch(error =>{
@@ -30,7 +30,7 @@ const Usuarios = () => {
                     <img className="my-5 mx-5" src={logoBitbox} alt="Logo bitbox" width="450" height="80"/>
                 </div>
                 
-                <h1 className="my-5 mx-5">Administrador de Usuarios</h1>
+                <h1 className="my-5 mx-5">Administrador de Rebajas</h1>
                 <div>
                     <img className="mx-5" src={logoIkea} alt="Logo ikea" width="450" height="200"/>
                 </div>
@@ -41,38 +41,32 @@ const Usuarios = () => {
                 <div className="row">
                     <div className="col-12 mb-5 d-flex justify-content-center">
                         <Link to={{
-                                pathname: "/newUser",
-                                state: {usuarios: {usuarios}}
+                                pathname: "/newPriceReduction",
+                                state: {priceReductions: {priceReductions}}
                                 }} /*params={{ usuarios: {usuarios} }}*/ 
-                                className="btn btn-success text-uppercase py-2 px-5 font-weight-bold">Crear Usuario
+                                className="btn btn-success text-uppercase py-2 px-5 font-weight-bold">Crear Rebaja
                         </Link>
                     </div>
                     <div className="col-md-8 mx-auto">
                         <div className="list-group">
-                            {usuarios.map(usuario => (
+                            {priceReductions.map(priceReduction => (
                                 <Link to={{
-                                        pathname: `/users/${usuario.iduser}`,
-                                        state: {usuario: usuario}
+                                        pathname: `/priceReductions/${priceReduction.idPriceReduction}`,
+                                        state: {priceReduction: priceReduction}
                                     }} 
-                                    key={usuario.iduser} 
+                                    key={priceReduction.idPriceReduction} 
                                     className="p-5 list-group-item list-group-item-arction
                                 flex-column align-items-start no-text-decoration">
                                     <div className="d-flex w-100 justify-content-between mb-4">
-                                        <h3  className="mb-3">{usuario.name}</h3>
+                                        <h3  className="mb-3">{priceReduction.description}</h3>
                                         <small className="fecha-alta">
-                                            {usuario.email}
+                                            {priceReduction.reducedPrice} %
                                         </small>
                                     </div>
-                                    <p className="mb-0">
-                                        {usuario.country}
-                                    </p>
 
                                     <div className="contacto py-3">
-                                        <p><b>Teléfono: </b>{usuario.phone}</p>
-                                        
-                                        <p><b>Fecha de alta: </b>{(usuario.entryDate)==null?"No valor" : (usuario.entryDate).substr(0,10)}</p>
-                                        <br/>
-                                        <p><b>Descripción: </b>{usuario.description}</p>
+                                        <p><b>Fecha inicio: </b>{(priceReduction.startDate).substr(0,10)}</p>
+                                        <p><b>Fecha finalización: </b>{(priceReduction.endDate).substr(0,10)}</p>
                                     </div>
                                     
                                 </Link>
@@ -87,4 +81,4 @@ const Usuarios = () => {
     );
 }
 
-export default Usuarios;
+export default PriceReductions;

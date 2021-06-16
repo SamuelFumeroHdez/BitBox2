@@ -3,41 +3,39 @@ import { Link, withRouter } from 'react-router-dom';
 import clienteAxios from '../config/axios';
 import Swal from 'sweetalert2';
 
-const NuevoUsuario = (props) => {
+const NuevoArticle = (props) => {
 
     //Generar state como objeto
 
-    console.log("Usuarios", props.location.state.usuarios.usuarios);
+    console.log("articles", props.location.state.articles.articles);
     console.log(props);
 
-    const [usuario, guardarUsuario] = useState({
-        name: '',
-        country: '',
-        phone: '',
-        entryDate: '',
-        email: '',
-        description: ''
+    const [article, guardarArticle] = useState({
+        description: '',
+        precio: '',
+        status: '',
+        creationDate: ''
     });
 
     //Leer datos del formulario
     const actualizarState = e => {
-        guardarUsuario({
-            ...usuario,
+        guardarArticle({
+            ...article,
             [e.target.name] : e.target.value
         })
     };
 
     //Enviar una peticion a la API
-    const crearNuevoUsuario = e =>{
+    const crearNuevoArticle = e =>{
         e.preventDefault();
-        clienteAxios.post('/api/users', usuario)
+        clienteAxios.post('/api/articles', article)
             .then(res => {
                 console.log("se hizo el post")
                 console.log(res, "respuesta");
                 //props.guardarConsultar(true);
-                props.location.state.usuarios.usuarios.push(res.data);
+                props.location.state.articles.articles.push(res.data);
                 //Redireccionar
-                props.history.push('/users');
+                props.history.push('/articles');
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -54,87 +52,65 @@ const NuevoUsuario = (props) => {
     return ( 
         
         <>
-            <h1 className="my-5">Crear nuevo usuario</h1>
+            <h1 className="my-5">Crear nuevo Artículo</h1>
             <div className="containter mt-5 py-5">
                 <div className="row">
                     <div className="col-12 mb-5 d-flex justify-content-center">
-                        <Link to={'/users'} className="btn btn-success text-uppercase py-2 px-5 font-weight-bold">Volver</Link>
+                        <Link to={'/articles'} className="btn btn-success text-uppercase py-2 px-5 font-weight-bold">Volver</Link>
                     </div>
                     <div className="col-md-8 mx-auto">
                     <form
-                        onSubmit= {crearNuevoUsuario}
+                        onSubmit= {crearNuevoArticle}
                         className="bg-white p-5 bordered">
                         <div className="form-group">
-                            <label htmlFor="nombre">Nombre Usuario</label>
+                            <label htmlFor="description">Descripción</label>
                             <input 
                                 type="text" 
                                 className="form-control form-control-lg" 
-                                id="name" 
-                                name="name" 
-                                placeholder="Nombre Usuario" 
+                                id="description" 
+                                name="description" 
+                                placeholder="Descripción del artículo" 
                                 onChange={actualizarState}
                             />
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="propietario">País</label>
+                            <label htmlFor="precio">Precio</label>
                             <input 
                                 type="text" 
                                 className="form-control form-control-lg" 
-                                id="country" 
-                                name="country" 
-                                placeholder="País"
+                                id="precio" 
+                                name="precio" 
+                                placeholder="Precio"
                                 onChange={actualizarState} 
                             />
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="email">Email</label>
+                            <label htmlFor="status">Estado</label>
                             <input 
                                 type="text" 
                                 className="form-control form-control-lg" 
-                                id="email" 
-                                name="email" 
-                                placeholder="Email" 
+                                id="status" 
+                                name="status" 
+                                placeholder="Estado" 
                                 onChange={actualizarState}
                             />
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="telefono">Teléfono</label>
-                            <input 
-                                type="tel" 
-                                className="form-control form-control-lg" 
-                                id="phone" 
-                                name="phone" 
-                                placeholder="Teléfono" 
-                                onChange={actualizarState}
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="fecha">Fecha Alta</label>
+                            <label htmlFor="creationDate">Fecha de creación</label>
                             <input 
                                 type="date" 
                                 className="form-control form-control-lg" 
-                                id="entryDate" 
-                                name="entryDate"  
+                                id="creationDate" 
+                                name="creationDate" 
+                                placeholder="CreationDate" 
                                 onChange={actualizarState}
                             />
                         </div>
 
-                        <div className="form-group">
-                            <label htmlFor="description">Descripción</label>
-                            <textarea 
-                                className="form-control" 
-                                name="description" 
-                                rows="6"
-                                onChange={actualizarState}
-                            ></textarea>
-                        </div>
-
-
-                        <input type="submit" className="btn btn-primary mt-3 w-100 p-3 text-uppercase font-weight-bold" value="Crear Usuario"  />
+                        <input type="submit" className="btn btn-primary mt-3 w-100 p-3 text-uppercase font-weight-bold" value="Crear Artículo"  />
                     </form>
                     </div>
                 </div>
@@ -145,4 +121,4 @@ const NuevoUsuario = (props) => {
      );
 }
  
-export default withRouter(NuevoUsuario);
+export default withRouter(NuevoArticle);

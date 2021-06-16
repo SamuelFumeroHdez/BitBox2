@@ -5,14 +5,9 @@ import clienteAxios from '../config/axios';
 import Swal from 'sweetalert2';
 
 const User = (props) => {
-  
-    if(!props.usuario){
-            props.history.push('/users');
-            return null;
-    }
-    const {usuario: {iduser, name, country, email, phone, entryDate, description}} = props;
+    
+    const {usuario: {iduser, name, country, email, phone, entryDate, description}} = props.location.state;
 
-    //elimina un registro
     const eliminarUsuario = id =>{
         
 
@@ -37,7 +32,6 @@ const User = (props) => {
               //Eliminado de la base de datos
               clienteAxios.delete(`/api/users/${id}`)
                 .then(res =>{
-                    props.guardarConsultar(true)
                     props.history.push('/users')
                 })
                 .catch(error => {

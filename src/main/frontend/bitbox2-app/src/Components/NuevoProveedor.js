@@ -26,12 +26,11 @@ const NuevoProveedor = (props) => {
 
     //Enviar una peticion a la API
     const crearNuevoProveedor = e =>{
-        console.log("Se llama a crear nuevo proveedor")
         e.preventDefault();
         clienteAxios.post('/api/suppliers', proveedor)
             .then(res => {
-                console.log(res);
-                props.guardarConsultarProveedores(true);
+                
+                props.location.state.suppliers.suppliers.push(res.data);
                 //Redireccionar
                 props.history.push('/suppliers');
                 Swal.fire({
