@@ -137,7 +137,7 @@ form {
     background-color: #3338DF
 }
 
-.add-supplier{
+.add-price-reduction{
     text-decoration: none;
     
     
@@ -156,9 +156,41 @@ form {
     margin-bottom: 8px;
 }
 
-.add-supplier:hover{
+.add-price-reduction:hover{
     
     background-color: #11812B
+}
+
+.add-supplier{
+    text-decoration: none;
+    
+    
+    /*padding-bottom: 0px;
+    padding-left: 13px;
+    padding-right: 13px;*/
+   
+    
+    color: #ffffff;
+    background-color: #272A87;
+    border-radius: 50%;
+    /*border: 2px solid #0016b0;*/
+    height: 44px;
+    padding-left: 13px;
+    padding-right: 13px;
+    margin-bottom: 8px;
+}
+
+.add-supplier:hover{
+    
+    background-color: #3338DF
+}
+
+.price-reduction-presionado{
+    background-color: #11812B !important;
+}
+
+.proveedor-presionado{
+    background-color: #3338DF !important;
 }
 
 .saltar-filas{

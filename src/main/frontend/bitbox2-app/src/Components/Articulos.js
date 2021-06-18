@@ -35,14 +35,15 @@ const useStyles = makeStyles((theme) => ({
 const Articulos = () => {
 
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
+    const [openPriceReductions, setOpenPriceReductions] = React.useState(false);
+    const [openSuppliers, setOpenSuppliers] = React.useState(false);
 
     const [articles, saveArticles] = useState([]);
     const [priceReductions, savePriceReductions] = useState([]);
+    const [suppliers, saveSuppliers] = useState([]);
 
-    
-
-    const handleOpen = () => {
+    const handleOpenPriceReductions = (e) => {
+        console.log(e)
         clienteAxios.get('/api/priceReductions/')
             .then(res=>{
                 console.log(res.data)
@@ -53,11 +54,32 @@ const Articulos = () => {
             })
                     
         console.log("modal abierto")
-        setOpen(true);
-      };
+        setOpenPriceReductions(true);
+    };
+
+    const handleOpenSuppliers = () => {
+
+        console.log(articles);
+        
+        clienteAxios.get('/api/suppliers/')
+            .then(res=>{
+                console.log(res.data)
+                saveSuppliers(res.data);
+            })
+            .catch(error=>{
+                console.log(error)
+            })
+                    
+        console.log("modal abierto")
+        setOpenSuppliers(true);
+    };
     
-      const handleClose = () => {
-        setOpen(false);
+      const handleClosePriceReductions = () => {
+        setOpenPriceReductions(false);
+      };
+
+      const handleCloseSuppliers = () => {
+        setOpenSuppliers(false);
       };
     
     
@@ -72,6 +94,30 @@ const Articulos = () => {
         console.log(error)
       })
     },[])
+
+    const changePriceReductionClass = e =>{
+        
+        const regex = /[A-Za-a0-9]*proveedor-presionado{1}[A-Za-a0-9]*/;
+
+        if(regex.test(e.target.className)){
+            e.target.classList.remove("proveedor-presionado")
+        }else{
+            e.target.classList.add("proveedor-presionado")
+        }
+        
+    }
+
+    const changeSupplierClass = e =>{
+        
+        const regex = /[A-Za-a0-9]*proveedor-presionado{1}[A-Za-a0-9]*/;
+
+        if(regex.test(e.target.className)){
+            e.target.classList.remove("proveedor-presionado")
+        }else{
+            e.target.classList.add("proveedor-presionado")
+        }
+        
+    }
 
     return (  
         <>
@@ -123,10 +169,10 @@ const Articulos = () => {
                                         </div>
                                         
 
-                                        <div className="add-item">
+                                        <button className="add-supplier" onClick={handleOpenSuppliers}>
                                             <span className="fuente-bold">+</span>
                                             
-                                        </div>
+                                        </button>
  
                                     </div>
 
@@ -143,7 +189,7 @@ const Articulos = () => {
                                         </div>
                                         
 
-                                        <button className="add-supplier" onClick={handleOpen}>
+                                        <button className="add-price-reduction" onClick={()=>{handleOpenPriceReductions(article.id)}}>
                                             <span className="fuente-bold">+</span>
                                             
                                         </button>
@@ -177,15 +223,15 @@ const Articulos = () => {
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
             className={classes.modal}
-            open={open}
-            onClose={handleClose}
+            open={openPriceReductions}
+            onClose={handleClosePriceReductions}
             closeAfterTransition
             BackdropComponent={Backdrop}
             BackdropProps={{
             timeout: 500,
             }}
         >
-            <Fade in={open}>
+            <Fade in={openPriceReductions}>
                 <div className={classes.paper}>
                   
                   <h2>Agrega Rebajas:</h2>
@@ -201,15 +247,57 @@ const Articulos = () => {
                  
                     <div className="d-flex my-4 saltar-filas" >
                         {priceReductions.map(priceReduction=>(
-                            <button onClick={()=>(console.log("hola"))} key={priceReduction.idPriceReduction} className="d-flex felx-items mb-4 price-reduction-card mx-3">
-                                <div className="mx-2">{priceReduction.description} </div>
-                                <div className="borde-redondo-blanco">&#10003;</div>
+                                
+                            <button name={priceReduction.idPriceReduction} onClick={changePriceReductionClass} key={priceReduction.idPriceReduction} className="d-flex felx-items mb-4 price-reduction-card mx-3">
+                                
+                                {priceReduction.description} 
                             </button>
+
                             //<div key={priceReduction.idPriceReduction}> {priceReduction.description} </div>
                         ))}
                     </div>
-                    
-                    
+                </div>
+            </Fade>
+      </Modal>
+
+      <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className={classes.modal}
+            open={openSuppliers}
+            onClose={handleCloseSuppliers}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            //idSupplier={}
+            BackdropProps={{
+            timeout: 500,
+            }}
+        >
+            <Fade in={openSuppliers}>
+                <div className={classes.paper}>
+                  
+                  <h2>Agrega Proveedores:</h2>
+                       
+                    <input 
+                            type="text" 
+                            className="form-control form-control-lg" 
+                            id="description" 
+                            name="description" 
+                            placeholder="Descripción del artículo" 
+                            /*onChange={actualizarState}*/
+                    />
+                 
+                    <div className="d-flex my-4 saltar-filas" >
+                        {suppliers.map(supplier=>{
+                            
+                            <button name={supplier.idsupplier} onClick={changeSupplierClass} key={supplier.idesupplier} className="d-flex felx-items mb-4 supplier-card mx-3">
+                                
+                                {supplier.name} 
+                            </button>
+                        }
+                            
+                        )}
+                    </div>
                 </div>
             </Fade>
       </Modal>
