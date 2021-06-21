@@ -37,14 +37,14 @@ const Articulos = () => {
     const classes = useStyles();
     const [openPriceReductions, setOpenPriceReductions] = React.useState(false);
     const [openSuppliers, setOpenSuppliers] = React.useState(false);
-
     const [articles, saveArticles] = useState([]);
+    const [articleSelected, setArticleSelected] = useState([]);
     const [priceReductions, savePriceReductions] = useState([]);
     const [suppliers, saveSuppliers] = useState([]);
 
-    const handleOpenPriceReductions = (e) => {
+    const handleOpenPriceReductions = async (e) => {
         console.log(e)
-        clienteAxios.get('/api/priceReductions/')
+        await clienteAxios.get('/api/priceReductions/')
             .then(res=>{
                 console.log(res.data)
                 savePriceReductions(res.data);
@@ -52,6 +52,10 @@ const Articulos = () => {
             .catch(error=>{
                 console.log(error)
             })
+
+        await clienteAxios.get(`/api/articles/${e}`)
+            .then(res=>(setArticleSelected(res.data)))
+            .catch(error=>(console.log(error)))
                     
         console.log("modal abierto")
         setOpenPriceReductions(true);
@@ -117,6 +121,10 @@ const Articulos = () => {
             e.target.classList.add("proveedor-presionado")
         }
         
+    }
+
+    function rebajaIncluida(priceReduction, id) {
+        return priceReduction.idPriceReduction === id;
     }
 
     return (  
@@ -226,6 +234,7 @@ const Articulos = () => {
             open={openPriceReductions}
             onClose={handleClosePriceReductions}
             closeAfterTransition
+            idArticle
             BackdropComponent={Backdrop}
             BackdropProps={{
             timeout: 500,
@@ -246,15 +255,22 @@ const Articulos = () => {
                     />
                  
                     <div className="d-flex my-4 saltar-filas" >
-                        {priceReductions.map(priceReduction=>(
-                                
+                        {priceReductions.map(priceReduction=>{
+                            
+                            
+                            /*if(articleSelected.priceReductions.find(rebajaIncluida(priceReduction,articleSelected.price))){
+                                console.log("Lo contiene")
+                            }else{
+                                console.log("No lo contiene")
+                            }*/
+                            
                             <button name={priceReduction.idPriceReduction} onClick={changePriceReductionClass} key={priceReduction.idPriceReduction} className="d-flex felx-items mb-4 price-reduction-card mx-3">
                                 
                                 {priceReduction.description} 
                             </button>
 
                             //<div key={priceReduction.idPriceReduction}> {priceReduction.description} </div>
-                        ))}
+                        })}
                     </div>
                 </div>
             </Fade>

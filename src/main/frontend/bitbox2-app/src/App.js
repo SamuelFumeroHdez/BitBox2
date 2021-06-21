@@ -12,6 +12,7 @@ import Supplier from './Components/Supplier';
 import PriceReductions from './Components/PriceReductions';
 import NewPriceReduction from './Components/NewPriceReduction';
 import PriceReduction from './Components/PriceReduction';
+import Menu from './Components/Menu';
 
 
 
@@ -21,6 +22,7 @@ function App(){
   return (
     <Router>
       <Switch>
+        <Route exact path="/" component={()=> <Menu/>}/>
         <Route exact path="/users" component={()=> <Usuarios/>}/>
         <Route exact path="/newUser" component={() => <NuevoUsuario/>}/>
         <Route exact path="/users/:id" component={() => <User />} />
