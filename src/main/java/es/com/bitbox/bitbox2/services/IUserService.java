@@ -1,6 +1,7 @@
 package es.com.bitbox.bitbox2.services;
 
 
+import es.com.bitbox.bitbox2.dto.RolDTO;
 import es.com.bitbox.bitbox2.dto.UserDTO;
 
 import java.util.List;
@@ -10,4 +11,5 @@ public interface IUserService {
     UserDTO createUser(UserDTO supplierDTO);
     UserDTO getUserById(long id);
     void deleteUser(long id);
+    UserDTO updateRol(long idUser, long idRol);
 }

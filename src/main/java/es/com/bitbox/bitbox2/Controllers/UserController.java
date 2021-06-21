@@ -1,5 +1,6 @@
 package es.com.bitbox.bitbox2.Controllers;
 
+import es.com.bitbox.bitbox2.dto.ArticleDTO;
 import es.com.bitbox.bitbox2.dto.UserDTO;
 import es.com.bitbox.bitbox2.services.IUserService;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +40,13 @@ public class UserController {
     @DeleteMapping("/users/{id}")
     public void deleteUserById(@PathVariable(name = "id") Long id){
         iUserService.deleteUser(id);
+    }
+
+    @PutMapping(value = "/users/{idUser}/roles/{idRol}")
+    public UserDTO updateRol(@PathVariable(name = "idUser") Long idUser, @PathVariable(name = "idRol") Long idRol) throws Exception {
+        //return iArticleService.addSupplier(supplierDTO, id);
+        return iUserService.updateRol(idUser, idRol);
+
     }
 
 
