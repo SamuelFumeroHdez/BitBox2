@@ -40,6 +40,13 @@ const PriceReductions = () => {
             <div className="containter mt-5 py-5">
                 <div className="row">
                     <div className="col-12 mb-5 d-flex justify-content-center">
+                        <Link to= {{
+                                pathname: '/',
+                                
+                                }} 
+                                className="btn btn-success text-uppercase py-2 px-5 font-weight-bold">Menú</Link>
+                    </div>
+                    <div className="col-12 mb-5 d-flex justify-content-center">
                         <Link to={{
                                 pathname: "/newPriceReduction",
                                 state: {priceReductions: {priceReductions}}
