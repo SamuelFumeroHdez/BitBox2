@@ -34,7 +34,6 @@ const [user,setUser] = useState({email:"", password:""});
 
 const Login = data => {
   if(data.email === admin.email && data.password === admin.password){
-    console.log("Logged in");
     setUser({
       email: data.email,
       password: data.password
@@ -55,8 +54,8 @@ const Login = data => {
         (user.email !== "") ? (
         <Router>
           <Switch>
-            <Route exact path="/" component={()=> <Menu/>}/>
-            <Route exact path="/users" component={()=> <Usuarios/>}/>
+            <Route exact path="/" component={Menu}/>
+            <Route exact path="/users" component={Usuarios}/>
             <Route exact path="/newUser" component={() => <NuevoUsuario/>}/>
             <Route exact path="/users/:id" component={() => <User />} />
             <Route exact path="/suppliers" component={()=><Suppliers />}/>

@@ -3,9 +3,12 @@ package es.com.bitbox.bitbox2.Controllers;
 import es.com.bitbox.bitbox2.dto.ArticleDTO;
 import es.com.bitbox.bitbox2.dto.UserDTO;
 import es.com.bitbox.bitbox2.services.IUserService;
+
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")

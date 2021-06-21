@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { faPlusSquare, faSave, faSquare } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import clienteAxios from '../config/axios';
 import { makeStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
-import Icon from '@material-ui/core/Icon'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
@@ -30,21 +27,23 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(2, 4, 3),
     },
   }));
-  let suppliers = []; /*Esto hay que convertirlo a un estado de React*/
+  
 
 const Articulos = () => {
 
     const classes = useStyles();
     const [openPriceReductions, setOpenPriceReductions] = React.useState(false);
     const [openSuppliers, setOpenSuppliers] = React.useState(false);
-    const [articles, saveArticles] = useState([]);
+
     const [articleSelected, setArticleSelected] = useState([]);
+    const [articles, saveArticles] = useState([]);
     const [priceReductions, savePriceReductions] = useState([]);
     const [suppliers, saveSuppliers] = useState([]);
 
-    const handleOpenPriceReductions = async (e) => {
-        console.log(e)
-        await clienteAxios.get('/api/priceReductions/')
+    const handleOpenPriceReductions = (e) => {
+        const article = articles.filter(art=>art.id==e);
+        setArticleSelected(article[0]);
+        clienteAxios.get('/api/priceReductions/')
             .then(res=>{
                 console.log(res.data)
                 savePriceReductions(res.data);
@@ -52,12 +51,9 @@ const Articulos = () => {
             .catch(error=>{
                 console.log(error)
             })
-
-        await clienteAxios.get(`/api/articles/${e}`)
-            .then(res=>(setArticleSelected(res.data)))
-            .catch(error=>(console.log(error)))
                     
         console.log("modal abierto")
+        
         setOpenPriceReductions(true);
     };
 
@@ -123,10 +119,6 @@ const Articulos = () => {
         
     }
 
-    function rebajaIncluida(priceReduction, id) {
-        return priceReduction.idPriceReduction === id;
-    }
-
     return (  
         <>
         <div className= "d-flex w-100 justify-content-between mb-4">
@@ -141,14 +133,14 @@ const Articulos = () => {
                 
         </div>
             
-        <div className="containter mt-5 py-5">
+        <div className="containter mt-5 py-5 main-content">
             <div className="row">
                 <div className="col-12 mb-5 d-flex justify-content-center">
                     <Link to= {{
                             pathname: '/',
                             
                             }} 
-                            className="btn btn-success text-uppercase py-2 px-5 font-weight-bold">Menú</Link>
+                            className="btn btn btn-success text-uppercase py-2 px-5 font-weight-bold">Menú</Link>
                 </div>
                 <div className="col-12 mb-5 d-flex justify-content-center">
                     <Link to= {{
@@ -212,20 +204,20 @@ const Articulos = () => {
                                     </div>
 
 
-                            
-                                <div className="contacto py-3">
-                                    <p><b>Fecha de creación: </b>{(article.creationDate).substr(0,10)}</p>
-                                </div>
-                            </div>
-                            /*<Link to={{
+                                <div className="separar-items">
+                                    <div className="contacto py-3">
+                                        <p><b>Fecha de creación: </b>{(article.creationDate).substr(0,10)}</p>
+                                    </div>
+                                    <Link to= {{
                                     pathname: `/articles/${article.id}`,
-                                    state: {article: article}
+                                    state: {article: {article}}
+                
                                     }} 
-                                    key={article.id} 
-                                    className="p-5 list-group-item list-group-item-arction flex-column align-items-start no-text-decoration">*/
-                               
+                                    className="btn btn-danger text-uppercase py-2 px-5 font-weight-bold">Eliminar</Link>
+                                </div>
                                 
-                            /*</Link>*/
+                            </div>
+                            
                             
                         ))}
                     </div>
@@ -241,13 +233,13 @@ const Articulos = () => {
             open={openPriceReductions}
             onClose={handleClosePriceReductions}
             closeAfterTransition
-            idArticle
             BackdropComponent={Backdrop}
             BackdropProps={{
             timeout: 500,
             }}
         >
-            <Fade in={openPriceReductions}>
+            <Fade in={openPriceReductions} id="ident">
+                
                 <div className={classes.paper}>
                   
                   <h2>Agrega Rebajas:</h2>
@@ -260,24 +252,29 @@ const Articulos = () => {
                             placeholder="Descripción del artículo" 
                             /*onChange={actualizarState}*/
                     />
-                 
-                    <div className="d-flex my-4 saltar-filas" >
-                        {priceReductions.map(priceReduction=>{
-                            
-                            
-                            /*if(articleSelected.priceReductions.find(rebajaIncluida(priceReduction,articleSelected.price))){
-                                console.log("Lo contiene")
-                            }else{
-                                console.log("No lo contiene")
-                            }*/
-                            
-                            <button name={priceReduction.idPriceReduction} onClick={changePriceReductionClass} key={priceReduction.idPriceReduction} className="d-flex felx-items mb-4 price-reduction-card mx-3">
-                                
-                                {priceReduction.description} 
-                            </button>
+                    
 
-                            //<div key={priceReduction.idPriceReduction}> {priceReduction.description} </div>
-                        })}
+                    <div className="d-flex my-4 saltar-filas">
+                        
+                        {priceReductions.map(priceReduction=>{  
+                            let existe = false;
+                            articleSelected.priceReductions.map(articlePriceReduction=>{
+                                if(articlePriceReduction.idPriceReduction === priceReduction.idPriceReduction){
+                                    existe = true;
+                                }
+                                
+
+                            })
+                            if(!existe){
+                                console.log("Añado ", priceReduction.description);
+                                let boton = document.createElement("button");
+                                boton.classList.add("d-flex", "felx-items", "mb-4", "price-reduction-card", "mx-3");
+                                boton.onclick = changePriceReductionClass;
+                                boton.innerHTML = priceReduction.description
+                                document.querySelector('.ident').appendChild(boton);  
+                            }   
+                        }                  
+                        )}
                     </div>
                 </div>
             </Fade>
@@ -300,6 +297,7 @@ const Articulos = () => {
                 <div className={classes.paper}>
                   
                   <h2>Agrega Proveedores:</h2>
+                  
                        
                     <input 
                             type="text" 
@@ -309,18 +307,17 @@ const Articulos = () => {
                             placeholder="Descripción del artículo" 
                             /*onChange={actualizarState}*/
                     />
-                 
+                    
                     <div className="d-flex my-4 saltar-filas" >
-                        {suppliers.map(supplier=>{
-                            
-                            <button name={supplier.idsupplier} onClick={changeSupplierClass} key={supplier.idesupplier} className="d-flex felx-items mb-4 supplier-card mx-3">
-                                
+                    {suppliers.forEach(supplier=>(
+                        
+                            <button /*name={supplier.idsupplier} onClick={changeSupplierClass} key={supplier.idesupplier} /*className="d-flex felx-items mb-4 supplier-card mx-3"*/>
                                 {supplier.name} 
                             </button>
-                        }
-                            
-                        )}
+                        )) 
+                    }
                     </div>
+                    
                 </div>
             </Fade>
       </Modal>

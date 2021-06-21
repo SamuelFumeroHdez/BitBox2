@@ -5,8 +5,9 @@ import clienteAxios from '../config/axios';
 import Swal from 'sweetalert2';
 
 const Article = (props) => {
-    
+    console.log("article", props.location.state.article.article);
     const {article: {id, description, precio, status, creationDate}} = props.location.state;
+
 
     const eliminarArticle = id =>{
         
@@ -64,7 +65,7 @@ const Article = (props) => {
                                 </p>
 
                                 <div className="contacto py-3">
-                                    <p><b>Fecha de creación: </b>{(creationDate).substr(0,10)}</p>
+                                   
                                     <br/>
                                     
                                 </div>
