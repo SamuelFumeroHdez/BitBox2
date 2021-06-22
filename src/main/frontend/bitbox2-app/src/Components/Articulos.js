@@ -6,10 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import logoBitbox from '../assets/img/logoBitBox.png';
-import logoIkea from '../assets/img/logoIkeaSinFondo.png';
-import Suppliers from './Suppliers';
-import PriceReduction from './PriceReduction';
+import Header from './Header';
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -121,17 +118,7 @@ const Articulos = () => {
 
     return (  
         <>
-        <div className= "d-flex w-100 justify-content-between mb-4">
-                <div>
-                    <img className="my-5 mx-5" src={logoBitbox} alt="Logo bitbox" width="450" height="80"/>
-                </div>
-                
-                <h1 className="my-5 mx-5">Administrador de Artículos</h1>
-                <div>
-                <img className="mx-5 my-5" src={logoIkea} alt="Logo ikea" width="400" height="75"/>
-            </div>
-                
-        </div>
+        <Header title="Administrador de artículos"/>    
             
         <div className="containter mt-5 py-5 main-content">
             <div className="row">
@@ -204,17 +191,12 @@ const Articulos = () => {
                                     </div>
 
 
-                                <div className="separar-items">
+                              
                                     <div className="contacto py-3">
                                         <p><b>Fecha de creación: </b>{(article.creationDate).substr(0,10)}</p>
                                     </div>
-                                    <Link to= {{
-                                    pathname: `/articles/${article.id}`,
-                                    state: {article: {article}}
-                
-                                    }} 
-                                    className="btn btn-danger text-uppercase py-2 px-5 font-weight-bold">Eliminar</Link>
-                                </div>
+                                    
+                            
                                 
                             </div>
                             
